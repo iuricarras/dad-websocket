@@ -2,13 +2,17 @@ exports.createLobby = () => {
     const games = new Map()
     let id = 1
 
-    const addGame = (user, socketId) => {
+    const addGame = (user, socketId, information) => {
         id++
+        console.log(information)
+        let player = {id: 1, player: user, playerSocketId: socketId, numPars: 0, leaved: false}
         const game = {
             id: id,
             created_at: Date.now(),
-            player1: user,
-            player1SocketId: socketId,
+            numberCurrentPlayers: 1,
+            players: [player],
+            numberPlayers: information.numberPlayers,
+            boardId: information.boardId,
         }
         games.set(id, game)
         return game
@@ -32,7 +36,7 @@ exports.createLobby = () => {
     }
 
     const leaveLobby = (socketId) => {
-        const gamesToDelete = [...games.values()].filter(game => game.player1SocketId == socketId)
+        const gamesToDelete = [...games.values()].filter(game => game.players[0].playerSocketId == socketId)
         gamesToDelete.forEach(game => {
             games.delete(game.id)
         })
