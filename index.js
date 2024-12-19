@@ -246,7 +246,11 @@ io.on('connection', (socket) => {
             let index = 1
             game.players.forEach((player) => {
                 player.id = index
+                if(index == 1){
+                    player.ready = null
+                }
                 index++
+
             })
             console.log(game.players)
             if (game.numberCurrentPlayers == 0) {
