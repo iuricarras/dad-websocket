@@ -78,6 +78,7 @@ exports.createGameEngine = () => {
 
     const initGame = (game) => {
         game.status = null;
+        game.numParsWin = 0;
         game.currentPlayer = 1;
         game.board = createBoard(game.boardId);
         game.numPars = numPars(game.boardId);

@@ -338,6 +338,10 @@ io.on('connection', (socket) => {
                         game.playerWin = player.player.id
                         game.status = 1
                         console.log(game.playerWin)
+                    }else if (game.numParsWin < player.numPars){
+                        game.numParsWin = player.numPars
+                        game.playerWin = player.player.id
+                        game.status = 1
                     }
 
                     io.to(roomName).emit('gameChanged', game)
